@@ -19,3 +19,8 @@ epidays = Array{Int64,1}(undef,dateLength)
 for i in epidays
   epidays[i] = Dates.datetime2rata(dateColumn[i]) - day0
 end
+
+# write converted data to new file
+wikievdraw[:, 1] = epidays
+
+DelimitedFiles.writedlm("ConvertedEVDdates.csv", wikiEVDraw, ',')
