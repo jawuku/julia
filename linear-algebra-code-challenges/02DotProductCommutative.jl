@@ -3,7 +3,7 @@ from Prof. Mike X Cohen's course in Linear Algebra
 https://www.udemy.com/course/linear-algebra-theory-and-implementation
 
 # Is the dot product commutative?
-# A.B == B.A ?
+# A*B' == B*A' ?
 =#
 
 using LinearAlgebra
@@ -22,8 +22,8 @@ display(b)
 println("\n")
 
 # calculate dot products
-dp1 = dot(a, b)
-dp2 = dot(b, a)
+dp1 = dot(a, b) # a * b' also works
+dp2 = dot(b, a) # b * a'
 
 # display them
 println("Dot product of a and b is $(dp1)")
@@ -44,8 +44,8 @@ d = rand(-10:10, 1, 2)
 println("Array c = $c")
 println("Array d = $d\n")
 
-dp3 = dot(c, d)
-dp4 = dot(d, c)
+dp3 = c * d'
+dp4 = d * c'
 
 println("Dot product of c and d is $(dp3)")
 println("Dot product of d and c is $(dp4)")
