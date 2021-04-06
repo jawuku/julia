@@ -18,6 +18,15 @@ function matmul(A,B)
     throw(DimensionMismatch("Matrices of dimensions $(colA) and $(rowB) cannot be multiplied together"))
   end
 
+# convert any 1D column vectors into 1*x 2D matrices
+  if   colA == 1
+    A = reshape(A, length(A), 1)
+  end
+  
+  if colB == 1
+    B = reshape(B, length(B), 1)
+  end
+  
 # initialise zero matrix to hold result
 # matrix size is the outer dimensions of the two matrices
   result = zeros(rowA,colB)
@@ -26,10 +35,17 @@ function matmul(A,B)
 
   for i in 1:rowA
     for j in 1:colB
-      result[i,j] = A[i,:]' * B[:,j]
+      result[i,j] = dot(A[i,:], B[:,j])
     end
   end
+#= alternatively, do the layering addition of outer product
+  for i in 1:colA
+    result += A[:, i] * B[i, :]'
+  end
+    
+=#
   
 # return the result
   return result
 end
+
