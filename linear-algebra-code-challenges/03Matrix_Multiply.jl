@@ -7,11 +7,7 @@ function matmul(A,B)
 
 # define row and column sizes
 # for each matrix
-  rowA = size(A)[1]
-  colA = size(A)[2]
-  
-  rowB = size(B)[1]
-  colB = size(B)[2]
+  julia
 
 # check that dimensions are valid for multiplication, otherwise throw error
   if colA != rowB
@@ -32,18 +28,15 @@ function matmul(A,B)
   result = zeros(rowA,colB)
 
 # calculate A*B, populate zero matrix with results
-
-  for i in 1:rowA
-    for j in 1:colB
-      result[i,j] = dot(A[i,:], B[:,j])
-    end
-  end
-#= alternatively, do the layering addition of outer product
-  for i in 1:colA
-    result += A[:, i] * B[i, :]'
+  for outerproduct in 1:rowB
+      result += A[:, i] * B[i, :]'
   end
     
-=#
+#= 2nd alternative:
+for i in 1:colA
+  BLAS.ger_64!(1.0, A[:, i], B[i, :], result)
+end
+  =#
   
 # return the result
   return result
