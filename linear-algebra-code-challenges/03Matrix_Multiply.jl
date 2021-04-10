@@ -24,7 +24,7 @@ function matmul(A,B)
 
 # initialise zero matrix to hold result
 # matrix size is the outer dimensions of the two matrices
-  result = zeros(rowA,colB)
+  result = zeros(rowA, colB)
 
 # calculate A*B, populate zero matrix with results
   for outerproduct in 1:rowB
