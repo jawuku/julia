@@ -49,6 +49,7 @@ Fnorm(A) = sqrt(Frb3(A,A))
 
 # Implementation in code
 # ----------------------
+using LinearAlgebra
 
 m = 9; n = 4;
 
@@ -59,12 +60,20 @@ Av = A[:] # reshapes into a (mxn) x 1 column vector
 
 Bv = B[:] # same for B
 
+## Ways of calculating Frobenius Dot Product
+
+# 1) Sum of Hadamard multiplication
 Frb1(A,B) = reduce(+, (A .* B))
 
-Frb2(A,B) = sum(Av .* Bv)
+# 2) Dot product of vectorised matrices
+Frb2(A,B) = A[:] .* B[:]
 
+# 3) Trace of transposed A matrix multiplied by B matrix
 Frb3(A,B) = tr(A' * B)
 
+# Frobenius Norm aka Matrix Norm:
+# 1) square root of trace of (A' * A)
 Fnorm1(A) = sqrt(Frb3(A,A))
 
-Fnorm2(A) = norm(A, 2) # 2nd way of doing Frobenius norm in Julia
+# 2) another way of doing Frobenius norm in Julia
+Fnorm2(A) = norm(A, 2) 
