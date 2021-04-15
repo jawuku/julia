@@ -14,12 +14,14 @@ add them together
 take square root
 
 =#
+
+# naive implementation
 frobnorm1(A) = sqrt(reduce(+, (map(x -> x^2, A))))
 
 ## (defn frobnorm [A]
 ##   (Math/sqrt (reduce + (map #(* % %) A))))
 
-# more efficient using LinearAlgebra package
+# more efficient ways using LinearAlgebra package
 
 using LinearAlgebra
 
