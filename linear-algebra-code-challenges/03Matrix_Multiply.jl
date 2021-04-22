@@ -1,6 +1,11 @@
 ## Multiply 2 matrices
 # checks for invalid dimensions
 # uses 1st method (element dot product method)
+
+function outer(A,B)
+  return A * B'
+end
+
 function matmul(A,B)
 
 # convert any 1D column vectors into 1*x 2D matrices
@@ -29,15 +34,9 @@ function matmul(A,B)
 # calculate A*B, populate zero matrix with results
 # uses the outer products of each row with its corresponding column
 # and adds the results together
-  for outerproduct in 1:rowB # could also use colA, as colA = rowB
-      result += A[:, outerproduct] * B[outerproduct, :]'
+  for i in 1:rowB # could also use colA, as colA = rowB
+      result += outer(A[:, i], B[i, :])
   end
-    
-#= 2nd alternative:
-for i in 1:colA
-  BLAS.ger_64!(1.0, A[:, i], B[i, :], result)
-end
-  =#
   
 # return the result
   return result
