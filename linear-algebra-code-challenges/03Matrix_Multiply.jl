@@ -27,8 +27,10 @@ function matmul(A,B)
   result = zeros(rowA, colB)
 
 # calculate A*B, populate zero matrix with results
-  for outerproduct in 1:rowB
-      result += A[:, i] * B[i, :]'
+# uses the outer products of each row with its corresponding column
+# and adds the results together
+  for outerproduct in 1:rowB # could also use colA, as colA = rowB
+      result += A[:, outerproduct] * B[outerproduct, :]'
   end
     
 #= 2nd alternative:
